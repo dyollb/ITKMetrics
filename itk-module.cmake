@@ -15,12 +15,14 @@ itk_module(Metrics
     ITKMetricsv4
     ITKSmoothing
   COMPILE_DEPENDS
-    ITKTestKernel
     ITKImageSources
+    ITKTestKernel
   TEST_DEPENDS
     ITKCommon
     ITKMetricsv4
+    ITKOptimizersv4
     ITKSmoothing
+    ITKTransform
   DESCRIPTION
     "${DOCUMENTATION}"
   EXCLUDE_FROM_DEFAULT
