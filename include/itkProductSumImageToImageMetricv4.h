@@ -37,6 +37,8 @@ namespace itk
  *
  *  See ProductSumImageToImageMetricv4GetValueAndDerivativeThreader::ProcessPoint
  *  for algorithm implementation.
+ *
+ * \ingroup Metrics
  */
 template <typename TFixedImage,
           typename TMovingImage,
