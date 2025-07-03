@@ -13,16 +13,10 @@ itk_module(Metrics
   DEPENDS
     ITKCommon
     ITKMetricsv4
-    ITKSmoothing
-    ITKTransform
   COMPILE_DEPENDS
     ITKImageSources
-    ITKSmoothing
     ITKTestKernel
-    ITKTransform
   TEST_DEPENDS
-    ITKCommon
-    ITKMetricsv4
     ITKOptimizersv4
     ITKSmoothing
     ITKTransform

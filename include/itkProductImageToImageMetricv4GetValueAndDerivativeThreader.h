@@ -15,34 +15,34 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-#ifndef itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader_h
-#define itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader_h
+#ifndef itkProductImageToImageMetricv4GetValueAndDerivativeThreader_h
+#define itkProductImageToImageMetricv4GetValueAndDerivativeThreader_h
 
 #include "itkImageToImageMetricv4GetValueAndDerivativeThreader.h"
 
 namespace itk
 {
 
-/** \class ProductSumImageToImageMetricv4GetValueAndDerivativeThreader
- * \brief Processes points for ProductSumImageToImageMetricv4 \c
+/** \class ProductImageToImageMetricv4GetValueAndDerivativeThreader
+ * \brief Processes points for ProductImageToImageMetricv4 \c
  * GetValueAndDerivative.
  *
  * \ingroup Metrics
  */
-template <typename TDomainPartitioner, typename TImageToImageMetric, typename TProductSumMetric>
-class ITK_TEMPLATE_EXPORT ProductSumImageToImageMetricv4GetValueAndDerivativeThreader
+template <typename TDomainPartitioner, typename TImageToImageMetric, typename TProductMetric>
+class ITK_TEMPLATE_EXPORT ProductImageToImageMetricv4GetValueAndDerivativeThreader
   : public ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>
 {
 public:
-  ITK_DISALLOW_COPY_AND_MOVE(ProductSumImageToImageMetricv4GetValueAndDerivativeThreader);
+  ITK_DISALLOW_COPY_AND_MOVE(ProductImageToImageMetricv4GetValueAndDerivativeThreader);
 
   /** Standard class type aliases. */
-  using Self = ProductSumImageToImageMetricv4GetValueAndDerivativeThreader;
+  using Self = ProductImageToImageMetricv4GetValueAndDerivativeThreader;
   using Superclass = ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>;
   using Pointer = SmartPointer<Self>;
   using ConstPointer = SmartPointer<const Self>;
 
-  itkTypeMacro(ProductSumImageToImageMetricv4GetValueAndDerivativeThreader,
+  itkTypeMacro(ProductImageToImageMetricv4GetValueAndDerivativeThreader,
                ImageToImageMetricv4GetValueAndDerivativeThreader);
 
   itkNewMacro(Self);
@@ -65,7 +65,7 @@ public:
   using typename Superclass::NumberOfParametersType;
 
 protected:
-  ProductSumImageToImageMetricv4GetValueAndDerivativeThreader() = default;
+  ProductImageToImageMetricv4GetValueAndDerivativeThreader() = default;
 
   /** This function computes the local voxel-wise contribution of
    *  the metric to the global integral of the metric/derivative.
@@ -87,7 +87,7 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-#  include "itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader.hxx"
+#  include "itkProductImageToImageMetricv4GetValueAndDerivativeThreader.hxx"
 #endif
 
 #endif

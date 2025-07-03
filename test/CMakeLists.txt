@@ -1,10 +1,11 @@
+itk_module_test()
+
 set(MetricsTests
-  itkProductSumImageToImageMetricv4Test.cxx
+  itkProductImageToImageMetricv4Test.cxx
   )
 
 CreateTestDriver(Metrics "${Metrics-Test_LIBRARIES}" "${MetricsTests}")
 
-
-itk_add_test(NAME itkProductSumImageToImageMetricv4Test
-  COMMAND MetricsTestDriver itkProductSumImageToImageMetricv4Test
+itk_add_test(NAME itkProductImageToImageMetricv4Test
+  COMMAND MetricsTestDriver itkProductImageToImageMetricv4Test
   )

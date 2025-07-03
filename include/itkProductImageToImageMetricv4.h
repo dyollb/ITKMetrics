@@ -15,27 +15,33 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-#ifndef itkProductSumImageToImageMetricv4_h
-#define itkProductSumImageToImageMetricv4_h
+#ifndef itkProductImageToImageMetricv4_h
+#define itkProductImageToImageMetricv4_h
 
 #include "itkImageToImageMetricv4.h"
-#include "itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader.h"
+#include "itkProductImageToImageMetricv4GetValueAndDerivativeThreader.h"
 #include "itkDefaultImageToImageMetricTraitsv4.h"
 
 namespace itk
 {
 
-/** \class ProductSumImageToImageMetricv4
+/** \class ProductImageToImageMetricv4
  *
- *  \brief Class implementing a product sum metric.
+ *  \brief Class implementing a product metric that computes the mean of pixel-wise products.
  *
- *  This metric computes the sum of the product of corresponding pixels
- *  between the fixed and moving images: sum(fixed * moving).
- *  This can be useful to register masks
- *  - For the moving or fixed mask you compute a clamped distance map (positive values).
- *    Multiplying the mask and the distance yields an asymmetric similarity metric.
+ *  This metric computes the mean of the product of corresponding pixels
+ *  between the fixed and moving images: mean(fixed * moving).
  *
- *  See ProductSumImageToImageMetricv4GetValueAndDerivativeThreader::ProcessPoint
+ *  The metric value is normalized by the number of valid pixels, making it
+ *  scale-independent and suitable for images of different sizes.
+ *
+ *  **Primary Use Case: Mask Registration**
+ *  This metric is particularly useful for registering masks:
+ *  - Compute a clamped distance map (positive values) for the moving or fixed mask
+ *  - Multiplying the mask and the distance map yields an asymmetric similarity metric
+ *  - The registration will align regions to minimize the distance
+ *
+ *  See ProductImageToImageMetricv4GetValueAndDerivativeThreader::ProcessPoint
  *  for algorithm implementation.
  *
  * \ingroup Metrics
@@ -46,14 +52,14 @@ template <typename TFixedImage,
           typename TInternalComputationValueType = double,
           typename TMetricTraits =
             DefaultImageToImageMetricTraitsv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType>>
-class ITK_TEMPLATE_EXPORT ProductSumImageToImageMetricv4
+class ITK_TEMPLATE_EXPORT ProductImageToImageMetricv4
   : public ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>
 {
 public:
-  ITK_DISALLOW_COPY_AND_MOVE(ProductSumImageToImageMetricv4);
+  ITK_DISALLOW_COPY_AND_MOVE(ProductImageToImageMetricv4);
 
   /** Standard class type aliases. */
-  using Self = ProductSumImageToImageMetricv4;
+  using Self = ProductImageToImageMetricv4;
   using Superclass =
     ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>;
   using Pointer = SmartPointer<Self>;
@@ -63,7 +69,7 @@ public:
   itkNewMacro(Self);
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro(ProductSumImageToImageMetricv4, ImageToImageMetricv4);
+  itkTypeMacro(ProductImageToImageMetricv4, ImageToImageMetricv4);
 
   using typename Superclass::DerivativeType;
 
@@ -88,22 +94,22 @@ public:
   static constexpr typename TMovingImage::ImageDimensionType  MovingImageDimension = TMovingImage::ImageDimension;
 
 protected:
-  ProductSumImageToImageMetricv4();
-  ~ProductSumImageToImageMetricv4() override = default;
+  ProductImageToImageMetricv4();
+  ~ProductImageToImageMetricv4() override = default;
 
-  friend class ProductSumImageToImageMetricv4GetValueAndDerivativeThreader<
+  friend class ProductImageToImageMetricv4GetValueAndDerivativeThreader<
     ThreadedImageRegionPartitioner<Superclass::VirtualImageDimension>,
     Superclass,
     Self>;
-  friend class ProductSumImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner,
-                                                                           Superclass,
-                                                                           Self>;
-  using ProductSumDenseGetValueAndDerivativeThreaderType = ProductSumImageToImageMetricv4GetValueAndDerivativeThreader<
+  friend class ProductImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner,
+                                                                        Superclass,
+                                                                        Self>;
+  using ProductDenseGetValueAndDerivativeThreaderType = ProductImageToImageMetricv4GetValueAndDerivativeThreader<
     ThreadedImageRegionPartitioner<Superclass::VirtualImageDimension>,
     Superclass,
     Self>;
-  using ProductSumSparseGetValueAndDerivativeThreaderType =
-    ProductSumImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner, Superclass, Self>;
+  using ProductSparseGetValueAndDerivativeThreaderType =
+    ProductImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner, Superclass, Self>;
 
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
@@ -112,7 +118,7 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-#  include "itkProductSumImageToImageMetricv4.hxx"
+#  include "itkProductImageToImageMetricv4.hxx"
 #endif
 
 #endif

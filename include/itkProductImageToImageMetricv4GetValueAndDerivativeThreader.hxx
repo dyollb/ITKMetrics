@@ -15,30 +15,28 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-#ifndef itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader_hxx
-#define itkProductSumImageToImageMetricv4GetValueAndDerivativeThreader_hxx
+#ifndef itkProductImageToImageMetricv4GetValueAndDerivativeThreader_hxx
+#define itkProductImageToImageMetricv4GetValueAndDerivativeThreader_hxx
 
 #include "itkDefaultConvertPixelTraits.h"
 
 namespace itk
 {
 
-template <typename TDomainPartitioner, typename TImageToImageMetric, typename TProductSumMetric>
+template <typename TDomainPartitioner, typename TImageToImageMetric, typename TProductMetric>
 bool
-ProductSumImageToImageMetricv4GetValueAndDerivativeThreader<
-  TDomainPartitioner,
-  TImageToImageMetric,
-  TProductSumMetric>::ProcessPoint(const VirtualIndexType &,
-                                   const VirtualPointType & virtualPoint,
-                                   const FixedImagePointType &,
-                                   const FixedImagePixelType & fixedImageValue,
-                                   const FixedImageGradientType &,
-                                   const MovingImagePointType &,
-                                   const MovingImagePixelType &    movingImageValue,
-                                   const MovingImageGradientType & movingImageGradient,
-                                   MeasureType &                   metricValueReturn,
-                                   DerivativeType &                localDerivativeReturn,
-                                   const ThreadIdType              threadId) const
+ProductImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric, TProductMetric>::
+  ProcessPoint(const VirtualIndexType &,
+               const VirtualPointType & virtualPoint,
+               const FixedImagePointType &,
+               const FixedImagePixelType & fixedImageValue,
+               const FixedImageGradientType &,
+               const MovingImagePointType &,
+               const MovingImagePixelType &    movingImageValue,
+               const MovingImageGradientType & movingImageGradient,
+               MeasureType &                   metricValueReturn,
+               DerivativeType &                localDerivativeReturn,
+               const ThreadIdType              threadId) const
 {
   /** Compute the product of fixed and moving image values. */
   const unsigned int nComponents = NumericTraits<FixedImagePixelType>::GetLength(fixedImageValue);

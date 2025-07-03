@@ -15,8 +15,8 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-#ifndef itkProductSumImageToImageMetricv4_hxx
-#define itkProductSumImageToImageMetricv4_hxx
+#ifndef itkProductImageToImageMetricv4_hxx
+#define itkProductImageToImageMetricv4_hxx
 
 
 namespace itk
@@ -27,13 +27,13 @@ template <typename TFixedImage,
           typename TVirtualImage,
           typename TInternalComputationValueType,
           typename TMetricTraits>
-ProductSumImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>::
-  ProductSumImageToImageMetricv4()
+ProductImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>::
+  ProductImageToImageMetricv4()
 {
   // We have our own GetValueAndDerivativeThreader's that we want
   // ImageToImageMetricv4 to use.
-  this->m_DenseGetValueAndDerivativeThreader = ProductSumDenseGetValueAndDerivativeThreaderType::New();
-  this->m_SparseGetValueAndDerivativeThreader = ProductSumSparseGetValueAndDerivativeThreaderType::New();
+  this->m_DenseGetValueAndDerivativeThreader = ProductDenseGetValueAndDerivativeThreaderType::New();
+  this->m_SparseGetValueAndDerivativeThreader = ProductSparseGetValueAndDerivativeThreaderType::New();
 }
 
 template <typename TFixedImage,
@@ -42,7 +42,7 @@ template <typename TFixedImage,
           typename TInternalComputationValueType,
           typename TMetricTraits>
 void
-ProductSumImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>::
+ProductImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputationValueType, TMetricTraits>::
   PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
