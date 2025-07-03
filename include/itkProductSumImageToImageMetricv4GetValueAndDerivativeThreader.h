@@ -27,7 +27,7 @@ namespace itk
  * \brief Processes points for ProductSumImageToImageMetricv4 \c
  * GetValueAndDerivative.
  *
- * \ingroup ITKMetricsv4
+ * \ingroup Metrics
  */
 template <typename TDomainPartitioner, typename TImageToImageMetric, typename TProductSumMetric>
 class ITK_TEMPLATE_EXPORT ProductSumImageToImageMetricv4GetValueAndDerivativeThreader

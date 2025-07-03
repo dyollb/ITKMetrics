@@ -77,7 +77,7 @@ int
 itkProductSumImageToImageMetricv4Test(int argc, char * argv[])
 {
   constexpr unsigned int Dimension = 2;
-  using PixelType = double;
+  using PixelType = float;
   using ImageType = itk::Image<PixelType, Dimension>;
 
   // Create test image parameters
@@ -156,7 +156,7 @@ itkProductSumImageToImageMetricv4Test(int argc, char * argv[])
     metric->GetValueAndDerivative(value2, derivative2);
 
     const double tolerance = 1e-10;
-    if (itk::Math::abs(value1 - value2) > tolerance)
+    if (std::abs(value1 - value2) > tolerance)
     {
       std::cerr << "ERROR: Different values with different thread counts:" << std::endl;
       std::cerr << "  1 thread:  " << value1 << std::endl;
@@ -189,7 +189,7 @@ itkProductSumImageToImageMetricv4Test(int argc, char * argv[])
     double expectedValue = 5.0 * 3.0 * (imageSize * imageSize);
     std::cout << "Constant images - Expected: " << expectedValue << ", Got: " << constantValue << std::endl;
 
-    if (itk::Math::abs(constantValue - expectedValue) > 1e-6)
+    if (std::abs(constantValue - expectedValue) > 1e-6)
     {
       std::cerr << "ERROR: Constant images test failed" << std::endl;
       std::cerr << "  Expected: " << expectedValue << std::endl;
