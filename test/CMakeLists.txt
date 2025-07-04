@@ -2,6 +2,7 @@ itk_module_test()
 
 set(MetricsTests
   itkProductImageToImageMetricv4Test.cxx
+  itkMatchCardinalityImageToImageMetricv4Test.cxx
   )
 
 CreateTestDriver(Metrics "${Metrics-Test_LIBRARIES}" "${MetricsTests}")
